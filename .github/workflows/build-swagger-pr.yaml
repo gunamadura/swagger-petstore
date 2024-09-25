@@ -1,4 +1,4 @@
-name: Build and PR with CodeQL Scan/update
+name: Build and PR with CodeQL Scan/
 
 on:
   workflow_dispatch:
