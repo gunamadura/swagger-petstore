@@ -1,4 +1,4 @@
-name: Build and PR with CodeQL Scan/update 
+name: Build and PR with CodeQL Scan/update
 
 on:
   workflow_dispatch:
@@ -6,7 +6,6 @@ on:
       version:
         description: 'Snapshot build version'
         required: true
-        default: ''
 
 jobs:
   update-pom:
@@ -49,6 +48,9 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository  # Ensure the repo is checked out before creating the PR
+        uses: actions/checkout@v3
+
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v5
         with:
@@ -80,8 +82,10 @@ jobs:
   merge-pr:
     needs: codeql-scan
     runs-on: ubuntu-latest
-    if: ${{ success() }}
     steps:
+      - name: Checkout repository  # Ensure the repo is checked out before merging
+        uses: actions/checkout@v3
+
       - name: Merge Pull Request
         run: |
           gh pr merge update-version-${{ github.event.inputs.version }} --merge
