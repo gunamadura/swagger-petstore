@@ -1,40 +1,29 @@
-name: Maven Build and Update Version
-
-on:
-  push:
-    branches:
-      - master  # or any other branch you want to target
-
+name: test-1
+on: workflow_dispatch
 jobs:
-  build-and-update-version:
+  checkout-and-build:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
+      - name: Git checkout
+        uses: actions/checkout@v3
 
-    - name: Checkout dynamic-vars-tasks-1.8
-      run: |
-        git fetch origin
-        git checkout -b dynamic-vars-tasks-1.8 origin/dynamic-vars-tasks-1.8
+      - name: Build with Maven
+        run: mvn clean install
 
-    - name: Maven Clean Install
-      run: mvn clean install
+      - name: Configure Git user
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
 
-    - name: Update version in pom.xml
-      run: |
-        chmod +w pom.xml
-        sed -i '/<name>[[:space:]]*swagger-petstore[[:space:]]*<\/name>/!b;n;s/<version>[[:space:]]*.*[[:space:]]*<\/version>/<version>1.0.0-SNAPSHOT<\/version>/' pom.xml
+      - name: Update version in pom.xml
+        run: |
+          # Use sed to update only the <version> tag under <project> context
+          new_version="1.0.21"  # Desired release version
+          sed -i '/<project/,/<\/project>/ s|<version>1.0.20-SNAPSHOT</version>|<version>'"${new_version}"'</version>|' pom.xml
 
-    - name: 
-      run: cat pom.xml  # This will output the contents of pom.xml to verify if the version was updated
-    - name: Configure Git, Commit, and Push Changes
-      run: |
-        git config --local user.name "GitHub Actions"
-        git config --local user.email "actions@github.com"
-        git add pom.xml
-        git commit -m "updated version in pom.xml" || echo "No changes to commit"
-        git pull --rebase origin dynamic-vars-tasks-1.8
-        git push origin HEAD:refs/heads/dynamic-vars-tasks-1.8
+      - name: Commit version change
+        run: |
+          # Commit the version change to git
+          git add pom.xml
+          git commit -m "Update version to ${new_version}"
+          git push origin HEAD
