@@ -31,7 +31,7 @@ jobs:
       - name: Update version for swagger-petstore in pom.xml
         run: |
           # Update the version for the swagger-petstore artifact only
-          sed -i -E '/<artifactId>swagger-petstore<\/artifactId>/,/<\/version>/ s|<version>[0-9A-Za-z.-]*</version>|<version>${{ github.event.inputs.version }}<'</version>|' pom.xml
+          sed -i -E '/<artifactId>swagger-petstore<\/artifactId>/,/<\/version>/ s|<version>[0-9A-Za-z.-]*</version>|<version>${{ github.event.inputs.version }}</version>|' pom.xml
 
       - name: Check if pom.xml was modified
         run: |
