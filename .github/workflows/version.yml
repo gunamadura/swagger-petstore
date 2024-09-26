@@ -1,6 +1,7 @@
 name: Build and PR with CodeQL Scan
-on: workflow_dispatch
-  inputs:
+on: 
+  workflow_dispatch:
+    inputs:
       version:
         description: 'Snapshot build version'
         required: true
