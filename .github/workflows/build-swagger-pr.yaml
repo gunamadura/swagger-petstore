@@ -1,6 +1,9 @@
 name: Build and PR with CodeQL Scan/Update
 
 on:
+  pull_request:
+    branches: 
+      - master
   workflow_dispatch:
     inputs:
       version:
@@ -48,6 +51,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          ref: master 
 
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v2
