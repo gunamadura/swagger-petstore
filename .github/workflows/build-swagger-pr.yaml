@@ -6,6 +6,8 @@ on:
       version:
         description: 'Snapshot build version'
         required: true
+  pull_request:
+    branches: [ "master" ]     
 
 jobs:
   update-pom:
