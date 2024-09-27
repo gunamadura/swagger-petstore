@@ -8,8 +8,8 @@
     <groupId>io.swagger</groupId>
     <artifactId>swagger-petstore</artifactId>
     <packaging>war</packaging>
-    <name>swagger-petstore</name>
-    <version>1.0.0</version>
+    <name>swagger-petst<name>
+    <version>1.0.12</version>
     <prerequisites>
         <maven>2.2.0</maven>
     </prerequisites>
