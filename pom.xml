@@ -14,6 +14,18 @@
         <maven>2.2.0</maven>
     </prerequisites>
 
+
+    <distributionManagement>
+        <repository>
+            <id>artifactory-release</id>
+            <url>https://your-jfrog-instance/artifactory/libs-release-local</url>
+        </repository>
+        <snapshotRepository>
+            <id>artifactory-snapshot</id>
+            <url>https://your-jfrog-instance/artifactory/libs-snapshot-local</url>
+        </snapshotRepository>
+    </distributionManagement>
+
     <build>
         <defaultGoal>install</defaultGoal>
         <directory>target</directory>
@@ -202,15 +214,6 @@
         </dependency>
 
     </dependencies>
-    <repositories>
-        <repository>
-            <id>sonatype-snapshots</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
     <properties>
         <maven-plugin-version>1.0.0</maven-plugin-version>
         <swagger-parser-version>2.1.21  </swagger-parser-version>
