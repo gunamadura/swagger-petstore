@@ -9,7 +9,11 @@
     <artifactId>swagger-petstore</artifactId>
     <packaging>war</packaging>
     <name>swagger-petstore</name>
-    <version>2.3.3</version>
+<<<<<<<<< Temporary merge branch 1
+    <version>2.2.2</version>
+=========
+    <version>2.2.3</version>
+>>>>>>>>> Temporary merge branch 2
     <prerequisites>
         <maven>2.2.0</maven>
     </prerequisites>
