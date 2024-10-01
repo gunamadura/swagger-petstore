@@ -1,6 +1,9 @@
 name: Build and PR with CodeQL Scan/Update
 
 on:
+  pull_request:
+    branches: 
+      - master
   workflow_dispatch:
     inputs:
       version:
